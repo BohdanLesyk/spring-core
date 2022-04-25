@@ -12,7 +12,7 @@
     <bean id="jazzMusicBean" class="software.sigma.JazzMusic"/>
 
     <!--  DI with list of beans  -->
-    <bean id="musicPlayer" class="software.sigma.MusicPlayer">
+    <bean id="musicPlayer" class="software.sigma.MusicPlayer" scope="prototype"> <!--  OR scope="singleton" be default  -->
         <property name="musicList">
             <list>
                 <ref bean="classicalMusicBean"/>
@@ -24,22 +24,6 @@
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
-
-    <!--  DI with setters  -->
-<!--    <bean id="musicPlayer" class="software.sigma.MusicPlayer">-->
-<!--        <property name="music" ref="musicBean"/>-->
-
-<!--        <property name="name" value="Some name"/>-->
-<!--        <property name="volume" value="50"/>-->
-<!--    </bean>-->
-
-    <!--  DI with property file  -->
-<!--    <bean id="musicPlayer2" class="software.sigma.MusicPlayer">-->
-<!--        <property name="music" ref="musicBean"/>-->
-
-<!--        <property name="name" value="${musicPlayer.name}"/>-->
-<!--        <property name="volume" value="${musicPlayer.volume}"/>-->
-<!--    </bean>-->
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 </beans>
