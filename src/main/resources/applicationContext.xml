@@ -4,8 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="testBean" class="software.sigma.TestBean">
-        <constructor-arg value="Hello, world!"/>
-    </bean>
-
+    <bean id="musicBean" class="software.sigma.ClassicalMusic"/>
+    <!-- OR <bean id="musicBean" class="software.sigma.RockMusic"/> -->
 </beans>
