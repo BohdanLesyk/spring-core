@@ -13,11 +13,6 @@ public class MusicPlayer {
 
     }
 
-    // IoC
-//    public MusicPlayer(List<Music> musicList) {
-//        this.musicList = musicList;
-//    }
-
     public void playMusic() {
         for (Music music : musicList) {
             System.out.println("Playing: " + music.getSong());
