@@ -8,6 +8,9 @@
     <!-- OR <bean id="musicBean" class="software.sigma.RockMusic"/> -->
 
     <bean id="musicPlayer" class="software.sigma.MusicPlayer">
-        <constructor-arg ref="musicBean"/>
+        <property name="music" ref="musicBean"/>
+
+        <property name="name" value="Some name"/>
+        <property name="volume" value="50"/>
     </bean>
 </beans>
