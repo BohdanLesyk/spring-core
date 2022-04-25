@@ -7,23 +7,11 @@
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="classicalMusicBean" class="software.sigma.ClassicalMusic"/>
-    <bean id="rockMusicBean" class="software.sigma.RockMusic"/>
-    <bean id="jazzMusicBean" class="software.sigma.JazzMusic"/>
-
-    <!--  DI with list of beans  -->
-    <bean id="musicPlayer" class="software.sigma.MusicPlayer" scope="prototype"> <!--  OR scope="singleton" be default  -->
-        <property name="musicList">
-            <list>
-                <ref bean="classicalMusicBean"/>
-                <ref bean="rockMusicBean"/>
-                <ref bean="jazzMusicBean"/>
-            </list>
-        </property>
-
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+    <bean id="classicalMusicBean"
+          class="software.sigma.ClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"
+          factory-method="getInstance"/>
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 </beans>
