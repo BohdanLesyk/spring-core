@@ -3,10 +3,12 @@ package software.sigma;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import software.sigma.MusicPlayer.musicStyles;
+
 @Component
 public class Computer {
-    private int ID;
-    private MusicPlayer musicPlayer;
+    private final int ID;
+    private final MusicPlayer musicPlayer;
 
     @Autowired
     public Computer(MusicPlayer musicPlayer) {
@@ -19,7 +21,7 @@ public class Computer {
         return "Computer{" +
                 "ID=" + ID +
                 ", musicPlayer=" + musicPlayer +
-                ", " + musicPlayer.playMusic() +
+                ", " + musicPlayer.playMusic(musicStyles.randomMusicStyle()) +
                 '}';
     }
 }
