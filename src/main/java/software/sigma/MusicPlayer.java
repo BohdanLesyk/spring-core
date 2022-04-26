@@ -1,86 +1,56 @@
 package software.sigma;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import java.util.LinkedList;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class MusicPlayer {
-    private List<Music> musicList = new LinkedList<>();
-
 //    @Autowired
-    private Music music;
+//    @Qualifier("classicalMusic")
+//    private Music music;
 
-    private ClassicalMusic classicalMusic;
-    private RockMusic rockMusic;
-    private JazzMusic jazzMusic;
+    private Music classicalMusic;
+    private Music rockMusic;
+
+    private Music jazzMusic;
+
+    public enum musicStyles {
+        CLASSICAL, JAZZ, ROCK;
+
+        private static final List<musicStyles> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+
+        public static musicStyles randomMusicStyle()  {
+            return VALUES.get(new Random().nextInt(VALUES.size()));
+        }
+    }
+
+    public MusicPlayer() { }
 
     @Autowired
-    public MusicPlayer(ClassicalMusic classicalMusic, RockMusic rockMusic, JazzMusic jazzMusic) {
+    public MusicPlayer(@Qualifier("classicalMusic") Music classicalMusic,
+                       @Qualifier("rockMusic") Music rockMusic,
+                       @Qualifier("jazzMusic") Music jazzMusic) {
         this.classicalMusic = classicalMusic;
         this.rockMusic = rockMusic;
         this.jazzMusic = jazzMusic;
     }
 
-    private String name;
-    private int volume;
-
-    public MusicPlayer() {
-
-    }
-
-//    @Autowired
-//    public MusicPlayer(Music music) {
-//        this.music = music;
-//    }
-//
-//    @Autowired
-//    public void setMusic(Music music) {
-//        this.music = music;
-//    }
-
-    public void playMusic(List<Music> musicList) {
-        for (Music music : musicList) {
-            System.out.println("Playing: " + music.getSong());
+    public String playMusic(musicStyles style) {
+        switch (style) {
+            case CLASSICAL:
+                return "Playing: \"" + classicalMusic.getSong() + "\", which style is " + style;
+            case JAZZ:
+                return "Playing: \"" + jazzMusic.getSong() + "\", which style is " + style;
+            case ROCK:
+                return "Playing: \"" + rockMusic.getSong() + "\", which style is " + style;
+            default:
+                return "Wrong parameter has passed";
         }
-    }
-
-//    public void playMusic() {
-//        System.out.println("Playing: " + classicalMusic.getSong());
-//        System.out.println("Playing: " + rockMusic.getSong());
-//        System.out.println("Playing: " + jazzMusic.getSong());
-//    }
-
-//    public void playMusic() {
-//        System.out.println("Playing: " + music.getSong());
-//    }
-
-    public String playMusic() {
-        return "Playing: " + classicalMusic.getSong();
-    }
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public List<Music> getMusicList() {
-        return musicList;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
     }
 }
