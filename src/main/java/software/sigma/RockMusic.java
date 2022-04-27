@@ -1,11 +1,13 @@
 package software.sigma;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Random;
 
 @Component
+@Scope("prototype")
 public class RockMusic implements Music {
     private final List<String> songList;
 

@@ -2,6 +2,9 @@ package software.sigma;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +23,16 @@ public class JazzMusic implements Music {
     @Override
     public String getSong() {
         return songList.get(new Random().nextInt(songList.size()));
+    }
+
+    @PostConstruct
+    public void doMyInit() {
+        System.out.println("Doing my initialization!");
+    }
+
+    @PreDestroy
+    public void doMyDestroy() {
+        System.out.println("Doing my destruction!");
     }
 
     @Override
